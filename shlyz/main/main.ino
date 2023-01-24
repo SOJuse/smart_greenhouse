@@ -24,16 +24,18 @@ boolean F = true;
 #define   MESH_PORT       5555   //порт по дефолту 5555
 Scheduler userScheduler;   // для контроля
 painlessMesh  mesh;   //обозначаем нашу библиотеку как mesh (для удобства)
-int nodeNumber = 1; //указываем номер ардуинки
-double temp = 6.5;
-double hum = 57.0;
+int nodeNumber; //указываем номер ардуинки
+double temp;
+double hum;
 
 //----------------------------
 
 //------------WIFI------------
 
-const char* ssid = "iPhone (Grisha)";
-const char* wifi_password = "12345678";
+//const char* ssid = "iPhone (Grisha)";
+//const char* wifi_password = "12345678";
+const char* ssid = "GDR";
+const char* wifi_password = "chika16!";
 WiFiClient wifiClient;
 
 //----------------------------
@@ -76,8 +78,7 @@ PubSubClient client(mqtt_server, 1883, wifiClient);
 
 void setup() {
   Serial.begin(115200);
-
-  //--------------MESH--------------
+ //--------------MESH--------------
 
   mesh.setDebugMsgTypes( ERROR | STARTUP );  // установите перед функцией init() чтобы выдавались приветственные сообщения
   mesh.init( MESH_PREFIX, MESH_PASSWORD, &userScheduler, MESH_PORT );
@@ -85,12 +86,10 @@ void setup() {
   //назначаем функциям свои события
   mesh.onReceive(&receivedCallback);
   mesh.onNewConnection(&newConnectionCallback);
-
-  //--------------------------------
-
-
 }
 
 void loop() {
   mesh.update(); //для коректной работы mesha
+
+
 }

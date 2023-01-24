@@ -1,10 +1,10 @@
-//запускаеться при подключение шлюза к серверу
+//запускается при подключение шлюза к серверу
 void onConnectionEstablished() {
   Serial.println("connected");
 }
 
 void publishData() {
-  disconnecting_mesh();
+//  disconnecting_mesh();
   delay(500);
   Serial.print("Connecting to ");
   Serial.println(ssid);
@@ -54,8 +54,8 @@ void publishData() {
     delay(10); //This delay ensures that client.publish does not clash with client.connect call
     client.publish("base/state/humidity", String(hum).c_str());
   }
-  client.disconnect();
+//  client.disconnect();
   Serial.println(WiFi.status());
   delay(500);
-  connecting_mesh();
+// connecting_mesh();
 }
