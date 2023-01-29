@@ -1,4 +1,4 @@
-//ПОДГРУЖАЕМ БИБЛИОТЕКИ
+//контроллер №1
 
 #include <ESP8266WiFi.h>
 #include "painlessMesh.h"
@@ -21,7 +21,7 @@ int nodeNumber = 2; //указываем номер ардуинки
 
 void setup() {
   Serial.begin(115200);
-  mesh.setDebugMsgTypes( ERROR | STARTUP );  // установите перед функцией init() чтобы выдавались приветственные сообщения
+  mesh.setDebugMsgTypes(ERROR | STARTUP );  // установите перед функцией init() чтобы выдавались приветственные сообщения
   mesh.init( MESH_PREFIX, MESH_PASSWORD, &userScheduler, MESH_PORT );
 
   //назначаем функциям свои события
@@ -29,7 +29,7 @@ void setup() {
   mesh.onReceive(&receivedCallback);
   mesh.onNewConnection(&newConnectionCallback);
 
-  userScheduler.addTask( taskSendMessage );   //добавляем задание в обработчик
+  userScheduler.addTask(taskSendMessage);   //добавляем задание в обработчик
   taskSendMessage.enable();   //включаем задание
 }
 

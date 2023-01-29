@@ -1,4 +1,4 @@
-//ПОДГРУЖАЕМ БИБЛИОТЕКИ
+//шлюз
 
 //#include <iocontrol.h>
 #include <ESP8266WiFi.h>
@@ -36,6 +36,9 @@ double hum;
 //const char* wifi_password = "12345678";
 const char* ssid = "GDR";
 const char* wifi_password = "chika16!";
+#define   STATION_SSID     "GDR"
+#define   STATION_PASSWORD "chika16!"
+
 WiFiClient wifiClient;
 
 //----------------------------
@@ -69,8 +72,8 @@ WiFiClient wifiClient;
 //------MQTT_CLIENT-----------
 
 const char* mqtt_server = "dev.rightech.io";
-const char* mqtt_username = "111"; //MQTT username
-const char* mqtt_password = "111"; //MQTT password
+const char* mqtt_username = "hihi23"; //MQTT username
+const char* mqtt_password = "hihi23"; //MQTT password
 const char* clientID = "mqtt-andrey";
 PubSubClient client(mqtt_server, 1883, wifiClient);
 
@@ -80,12 +83,14 @@ void setup() {
   Serial.begin(115200);
  //--------------MESH--------------
 
-  mesh.setDebugMsgTypes( ERROR | STARTUP );  // установите перед функцией init() чтобы выдавались приветственные сообщения
+  mesh.setDebugMsgTypes( ERROR | STARTUP | CONNECTION );  // установите перед функцией init() чтобы выдавались приветственные сообщения
   mesh.init( MESH_PREFIX, MESH_PASSWORD, &userScheduler, MESH_PORT );
 
   //назначаем функциям свои события
   mesh.onReceive(&receivedCallback);
   mesh.onNewConnection(&newConnectionCallback);
+  
+  
 }
 
 void loop() {

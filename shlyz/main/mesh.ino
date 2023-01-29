@@ -12,14 +12,14 @@ void newConnectionCallback(uint32_t nodeId) {
   Serial.printf("New Connection, nodeId = %u\n", nodeId);
 }
 
-//void disconnecting_mesh() {
- // F = false;
- // mesh.stop();
-//}
+void disconnecting_mesh() {
+  F = false;
+  mesh.stop();
+}
 
-//void connecting_mesh() {
-//  mesh.setDebugMsgTypes( ERROR | STARTUP );  // установите перед функцией init() чтобы выдавались приветственные сообщения
- // mesh.init( MESH_PREFIX, MESH_PASSWORD, &userScheduler, MESH_PORT );
-//  mesh.onReceive(&receivedCallback);
-//  mesh.onNewConnection(&newConnectionCallback);
-//}
+void connecting_mesh() {
+  mesh.setDebugMsgTypes( ERROR | STARTUP );  // установите перед функцией init() чтобы выдавались приветственные сообщения
+  mesh.init( MESH_PREFIX, MESH_PASSWORD, &userScheduler, MESH_PORT );
+  mesh.onReceive(&receivedCallback);
+  mesh.onNewConnection(&newConnectionCallback);
+}

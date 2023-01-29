@@ -4,8 +4,9 @@ void onConnectionEstablished() {
 }
 
 void publishData() {
-//  disconnecting_mesh();
-  delay(500);
+ disconnecting_mesh();
+/*
+ //  delay(500);
   Serial.print("Connecting to ");
   Serial.println(ssid);
 
@@ -21,7 +22,11 @@ void publishData() {
   Serial.println("WiFi connected");
   Serial.println("IP Address");
   Serial.println(WiFi.localIP());
+  */
+ //Запускаем WIFI
+  WIFIinit();
 
+  
   //Connect to MQTT Broker
   //client.connect returns a boolean value to let us know if the connection was successful
   //if the connection is failing, make sure you are using the correct MQTT Username and Password
@@ -54,8 +59,12 @@ void publishData() {
     delay(10); //This delay ensures that client.publish does not clash with client.connect call
     client.publish("base/state/humidity", String(hum).c_str());
   }
-//  client.disconnect();
-  Serial.println(WiFi.status());
+  Serial.print ("t=");
+  Serial.println(temp);
+  client.disconnect();
+  WiFi.mode(WIFI_OFF);
+//  Serial.println(WiFi.status());
   delay(500);
-// connecting_mesh();
+  
+ connecting_mesh();
 }
