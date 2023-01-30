@@ -3,9 +3,18 @@ void receivedCallback( uint32_t from, String &msg ) {
   JSONVar myObject = JSON.parse(msg.c_str());   //парсим полученные данные
   //записываем значения в переменные
   nodeNumber = myObject["node"];
-  temp = myObject["temp"];
-  hum = myObject["hum"];
-  Serial.println(temp);
+  switch (nodeNumber) {
+    case 1:
+      temp1 = myObject["temp"];
+      hum1 = myObject["hum"];
+      break;
+    case 2:
+      temp2 = myObject["temp"];
+      hum2 = myObject["hum"];
+      break;
+  }
+  temp=(temp1+temp2)/2;
+  hum=(hum1+hum2)/2;
   publishData();
 }
 void newConnectionCallback(uint32_t nodeId) {

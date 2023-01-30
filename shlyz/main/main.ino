@@ -25,8 +25,8 @@ boolean F = true;
 Scheduler userScheduler;   // для контроля
 painlessMesh  mesh;   //обозначаем нашу библиотеку как mesh (для удобства)
 int nodeNumber; //указываем номер ардуинки
-double temp;
-double hum;
+double temp, temp1, temp2;
+double hum, hum1, hum2;
 
 //----------------------------
 
@@ -36,8 +36,6 @@ double hum;
 //const char* wifi_password = "12345678";
 const char* ssid = "GDR";
 const char* wifi_password = "chika16!";
-#define   STATION_SSID     "GDR"
-#define   STATION_PASSWORD "chika16!"
 
 WiFiClient wifiClient;
 
