@@ -3,6 +3,8 @@
 #include <ESP8266WiFi.h>
 #include "painlessMesh.h"
 #include <Arduino_JSON.h>
+#include <Adafruit_AHTX0.h>
+
 
 //*********ПЕРЕМЕННЫЕ*********
 
@@ -11,6 +13,7 @@
 #define   MESH_PREFIX     "teplitsa"   //логин нашей сети
 #define   MESH_PASSWORD   "teplitsa"   //пароль
 #define   MESH_PORT       5555   //порт по дефолту 5555
+Adafruit_AHTX0 aht; // датчик темп-ры и влажности
 Scheduler userScheduler;   // для контроля
 painlessMesh  mesh;   //обозначаем нашу библиотеку как mesh (для удобства)
 void sendMessage() ;   //задаем пустышку для коректной работы task
@@ -31,6 +34,7 @@ void setup() {
 
   userScheduler.addTask(taskSendMessage);   //добавляем задание в обработчик
   taskSendMessage.enable();   //включаем задание
+  aht.begin();
 }
 
 void loop() {
