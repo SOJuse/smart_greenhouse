@@ -19,6 +19,7 @@ double water;
 Scheduler userScheduler;   // для контроля
 painlessMesh  mesh;   //обозначаем нашу библиотеку как mesh (для удобства)
 int nodeNumber; //указываем номер ардуинки
+int angle; //угол подъема 
 double temp, temp1, temp2;
 double hum, hum1, hum2;
 double ghum1, ghum2;

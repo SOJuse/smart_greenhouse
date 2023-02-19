@@ -17,23 +17,33 @@ void publishData() {
         // Выводим текст в последовательный порт
         Serial.println("------- Read OK -------");
         // Записываем считанный из сервиса значения в переменные
-        long io_Angle_Door = mypanel.readInt(VarName_Angle_Door);   // целочисленная переменна
+        long io_Angle_Door = mypanel.readInt(VarName_Angle_Door);   // целочисленная переменная
         Serial.println((String)"io_Angle_Door = "+io_Angle_Door);
-        long io_Door_Up = mypanel.readInt(VarName_Door_Up);   // целочисленная переменна
+        long io_Door_Up = mypanel.readInt(VarName_Door_Up);   // целочисленная переменная
         Serial.println((String)"io_Door_Up = "+io_Door_Up);
-        long io_Door_Down = mypanel.readInt(VarName_Door_Down);   // целочисленная переменна
+        long io_Door_Down = mypanel.readInt(VarName_Door_Down);   // целочисленная переменная
         Serial.println((String)"io_Door_Down = "+io_Door_Down);
-        
+        angle = io_Angle_Door;
+        if (io_Door_Up == 1){
+          Serial.println(angle);
+          Serial.println ("Up");
+          mypanel.write(VarName_Door_Up, 0); 
+        }
+        if (io_Door_Down == 1) {
+           Serial.println(angle);
+           Serial.println("Down");
+           mypanel.write(VarName_Door_Down, 0); 
+           }
     } 
 
     // ************************ ЗАПИСЬ ************************
     
-    // Записываем  значение в переменную для отпраки в сервис
-    mypanel.write(VarName_Temperature, 12.345);   // Записали значение 1.2345
-    mypanel.write(VarName_Humidity, 123.45);   // Записали значение 1.2345
-    mypanel.write(VarName_Water_Level, 1234.5);   // Записали значение 1.2345
-    mypanel.write(VarName_Ground_Humidity_1, "start");  // Записали слово "start"
-    mypanel.write(VarName_Ground_Humidity_2, "start");  // Записали слово "start"
+    // Записываем  значение в переменную для отправки в сервис
+    mypanel.write(VarName_Temperature, temp);   // Записали значение температуры
+    mypanel.write(VarName_Humidity, hum);   // Записали значение влажности
+    mypanel.write(VarName_Water_Level, water);   // Записали значение уровня воды
+    mypanel.write(VarName_Ground_Humidity_1, s_ghum1);  // Записали влажность почвы 1
+    mypanel.write(VarName_Ground_Humidity_2, s_ghum2);  // Записали влажность почвы 2
     
     // Отправляем переменные из контроллера в сервис
     status = mypanel.writeUpdate();

@@ -8,17 +8,17 @@ void receivedCallback( uint32_t from, String &msg ) {
       temp1 = myObject["temp"];
       hum1 = myObject["hum"];
       ghum1 = myObject["ghum"];
-      if (ghum1 == 0) s_ghum1 = "Сухо";
-      if (ghum1 == 1) s_ghum1 = "Норм";
-      if (ghum1 == 2) s_ghum1 = "Влажна";
+      if (ghum1 == 0) s_ghum1 = "Dry";
+      if (ghum1 == 1) s_ghum1 = "Norm";
+      if (ghum1 == 2) s_ghum1 = "Wet";
       break;
     case 2:
       temp2 = myObject["temp"];
       hum2 = myObject["hum"];
       ghum2 = myObject["ghum"];
-      if (ghum2 == 0) s_ghum2 = "Сухо";
-      if (ghum2 == 1) s_ghum2 = "Норм";
-      if (ghum1 == 2) s_ghum2 = "Влажна";
+      if (ghum2 == 0) s_ghum2 = "Dry";
+      if (ghum2 == 1) s_ghum2 = "Norm";
+      if (ghum1 == 2) s_ghum2 = "Wet";
       break;
     case 3:
     water = myObject["waterLevel"];
