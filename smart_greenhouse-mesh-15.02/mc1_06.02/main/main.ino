@@ -27,7 +27,7 @@ int nodeNumber = 1; //указываем номер ардуинки
 
 void setup() {
   pinMode(sensorPower, OUTPUT);
-  // Изначально оставляем датчику выключенным
+  // Изначально оставляем датчик выключенным
   digitalWrite(sensorPower, LOW);
   Serial.begin(115200);
   mesh.setDebugMsgTypes(ERROR | STARTUP );  // установите перед функцией init() чтобы выдавались приветственные сообщения

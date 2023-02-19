@@ -34,8 +34,6 @@ void receivedCallback( uint32_t from, String &msg ) {
   Serial.println(temp);
   Serial.println(hum);
 
- 
-  
   publishData();
 }
 void newConnectionCallback(uint32_t nodeId) {

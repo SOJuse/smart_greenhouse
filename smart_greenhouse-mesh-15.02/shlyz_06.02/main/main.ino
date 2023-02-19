@@ -1,25 +1,18 @@
 //шлюз
 
-//#include <iocontrol.h>
+#include <iocontrol.h>
 #include <ESP8266WiFi.h>
 #include <Arduino_JSON.h>
 #include "painlessMesh.h"
-#include "EspMQTTClient.h"
+//#include "EspMQTTClient.h"
 #include <PubSubClient.h>
 //#include <WiFi.h>
 
 //*********ПЕРЕМЕННЫЕ*********
-
 boolean F = true;
 double water;
 
-//-----------RIGHTECHIO-----------
-
-//#define PUB_DELAY (5 * 1000) /* 5 seconds */
-
-//--------------------------------
 //--------PAINLESSMESH--------
-
 #define   MESH_PREFIX     "teplitsa"   //логин нашей сети
 #define   MESH_PASSWORD   "teplitsa"   //пароль
 #define   MESH_PORT       5555   //порт по дефолту 5555
@@ -31,54 +24,35 @@ double hum, hum1, hum2;
 double ghum1, ghum2;
 String s_ghum1, s_ghum2;
 
-//----------------------------
-
 //------------WIFI------------
 
-const char* ssid = "iPhone (Grisha)";
-const char* wifi_password = "12345678";
-//const char* ssid = "GDR";
-//const char* wifi_password = "chika16!";
+//const char* ssid = "iPhone (Grisha)";
+//const char* wifi_password = "12345678";
+const char* ssid = "GDR";
+const char* wifi_password = "chika16!";
 
 WiFiClient wifiClient;
 
-//----------------------------
+//----------IOCONTROL----------
 
-/*//----------IOCONTROL----------
+// Название панели на сайте iocontrol.ru
+const char* myPanelName = "smart_greenhouse1103";
+int status;
 
-  const char* myPanelName = "Teplitsa2023";   //название панели
-  //переменные
-  int status;
-  const char* VarName_temp = "temp";
-  const char* VarName_hum = "hum";
+// Название переменных как на сайте iocontrol.ru
+const char* VarName_Temperature = "Temperature";
+const char* VarName_Humidity = "Humidity";
+const char* VarName_Water_Level = "Water_Level";
+const char* VarName_Angle_Door = "Angle_Door";
+const char* VarName_Ground_Humidity_1 = "Ground_Humidity_1";
+const char* VarName_Ground_Humidity_2 = "Ground_Humidity_2";
+const char* VarName_Door_Up = "Door_Up";
+const char* VarName_Door_Down = "Door_Down";
+
+  
   WiFiClient client;   // Создаём объект клиента класса EthernetClient
   //передаем в конструктр название панели и клиента
   iocontrol mypanel(myPanelName, client);
-
-  //-----------------------------*/
-
-/*//-----------RIGHTECHIO-----------
-
-  //подлкючаем к вайфай и сети комара
-  EspMQTTClient client(
-  "iPhone (Grisha)",
-  "12345678",
-  "dev.rightech.io",  // MQTT Broker server ip
-  "111",   // Can be omitted if not needed
-  "111",   // Can be omitted if not needed
-  "mqtt-andrey"      // Client name that uniquely identify your device
-  );
-
-  //--------------------------------*/
-//------MQTT_CLIENT-----------
-
-const char* mqtt_server = "dev.rightech.io";
-const char* mqtt_username = "hihi23"; //MQTT username
-const char* mqtt_password = "hihi23"; //MQTT password
-const char* clientID = "mqtt-greenhouse1103";
-PubSubClient client(mqtt_server, 1883, wifiClient);
-
-//---------------------------
 
 void setup() {
   Serial.begin(115200);
@@ -90,12 +64,13 @@ void setup() {
   //назначаем функциям свои события
   mesh.onReceive(&receivedCallback);
   mesh.onNewConnection(&newConnectionCallback);
-  
-  
+
+    // Вызываем функцию первого запроса к сервису
+    mypanel.begin();
 }
 
 void loop() {
   mesh.update(); //для коректной работы mesha
 
-
+  
 }
