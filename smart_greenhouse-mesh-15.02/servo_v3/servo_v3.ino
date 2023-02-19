@@ -4,6 +4,7 @@
 #define SERVO1_LEFT 12 
 #define SERVO2_RIGHT 11 
 #define CURRENT_SET 850 
+#define mosPIN 4
 
 
 // создаём объекты для управления сервоприводами
@@ -26,6 +27,9 @@ void setup()
   myservo2.attach(SERVO2_RIGHT);
   myservo1.write(0);
   myservo2.write(180);
+// увлажнитель
+  pinMode(mosPIN, OUTPUT);
+  digitalWrite(mosPIN, 0);
    
   delay(1000);
   Serial.begin(9600); // подключаем монитор порта
@@ -84,8 +88,14 @@ if (Serial.available() > 0) {                 // если есть что-то �
       Serial.println("up");
       Serial.println(start_up);
     }
-    else if (strData.startsWith("down")){               // разбор строки
+    else if (strData.startsWith("down")){               // 
       start_down = true;
+    }
+    else if (strData.startsWith("on")){               // 
+      digitalWrite(mosPIN, 1); // включить увлажнитель
+    }
+    else if (strData.startsWith("off")){               // 
+      digitalWrite(mosPIN, 0); // выключить увлажнитель
     }
     else {
       angle = strData.toInt();
