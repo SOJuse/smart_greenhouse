@@ -8,7 +8,7 @@ void WIFIinit() {
     delay(1000);
   }
   if (WiFi.status() != WL_CONNECTED)
-  {
+  { 
     // Если не удалось подключиться запускаем в режиме AP
     Serial.println("");
     Serial.println("WiFi up AP");

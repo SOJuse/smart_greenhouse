@@ -29,8 +29,8 @@ String s_ghum1, s_ghum2;
 
 //const char* ssid = "iPhone (Grisha)";
 //const char* wifi_password = "12345678";
-const char* ssid = "GDR";
-const char* wifi_password = "chika16!";
+const char* ssid = "AndroidA";
+const char* wifi_password = "chromech";
 
 WiFiClient wifiClient;
 

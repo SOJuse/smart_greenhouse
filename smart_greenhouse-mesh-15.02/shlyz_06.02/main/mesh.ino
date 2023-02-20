@@ -31,7 +31,11 @@ void receivedCallback( uint32_t from, String &msg ) {
   Serial.println(s_ghum2);
   Serial.print("MK3 ");
   Serial.println(water);
+  Serial.println(temp1);
+  Serial.println(temp2);
   Serial.println(temp);
+  Serial.println(hum1);
+  Serial.println(hum2);
   Serial.println(hum);
 
   publishData();
